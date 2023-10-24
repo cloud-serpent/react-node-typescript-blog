@@ -19,10 +19,10 @@ import { PATH } from 'consts';
 export const SignupView: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmpassword] = useState('');
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
   const [username, setUsername] = useState('');
-  const [role, setRole] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,7 +31,7 @@ export const SignupView: React.FC = () => {
     console.log(phone);
     console.log(code);
     console.log(username);
-    console.log(role);
+    console.log(confirmpassword);
   };
   return (
     <Container>
@@ -60,6 +60,14 @@ export const SignupView: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputGroup>
+          <InputGroup>
+            <InputTitle>Confirm Password</InputTitle>
+            <InputItem
+              type="password"
+              value={confirmpassword}
+              onChange={(e) => setConfirmpassword(e.target.value)}
+            />
+          </InputGroup>
           <InputRowGroup>
             <InputGroup>
               <InputTitle>Phone Number</InputTitle>
@@ -84,14 +92,6 @@ export const SignupView: React.FC = () => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            />
-          </InputGroup>
-          <InputGroup>
-            <InputTitle>Role</InputTitle>
-            <InputItem
-              type="text"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
             />
           </InputGroup>
         </InputSection>
