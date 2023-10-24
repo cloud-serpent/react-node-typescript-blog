@@ -3,7 +3,6 @@ import {
   Container,
   Ads,
   FormContainer,
-  LogoUploader,
   Title,
   InputGroup,
   InputRowGroup,
@@ -37,7 +36,6 @@ export const SignupView: React.FC = () => {
     <Container>
       <Ads src={imgBack} />
       <FormContainer onSubmit={handleSubmit}>
-        <LogoUploader src="#" />
         <Title>Create an Account</Title>
         <div>
           Already have an account?

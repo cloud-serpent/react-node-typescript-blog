@@ -29,8 +29,9 @@ export const FormContainer = styled.form`
   padding: 64px 72px 56px 72px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 30px;
   align-items: center;
+  margin-top: 20px;
 `;
 
 export const LogoUploader = styled.img`
