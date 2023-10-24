@@ -14,4 +14,6 @@ export const ContentSection = styled.div`
   margin-bottom: 60px;
   height: calc(100% - 120px);
   overflow: auto;
+  display: flex;
+  justify-content: center;
 `;
