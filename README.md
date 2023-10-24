@@ -1,2 +1,2 @@
 # react-node-typescript-blog
-Blog website template with React, Node and TypeScript
+blog website frontend template with React and TypeScript
