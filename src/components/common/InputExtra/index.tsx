@@ -4,15 +4,17 @@ import { Container, IconButton, Label } from './style';
 interface InputExtraProps {
   label?: string;
   icon: React.ReactNode;
+  onChange?: () => void;
 }
 
 export const InputExtraComponent: React.FC<InputExtraProps> = ({
   label,
   icon,
+  onChange,
 }) => {
   return (
     <Container>
-      <IconButton>{icon}</IconButton>
+      <IconButton onClick={onChange}>{icon}</IconButton>
       <Label>{label}</Label>
     </Container>
   );

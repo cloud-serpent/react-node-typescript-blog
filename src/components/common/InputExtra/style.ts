@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  gap: 8px;
-  align-items: flex-end;
+  gap: 4px;
+  align-items: center;
   height: 27px;
 `;
 

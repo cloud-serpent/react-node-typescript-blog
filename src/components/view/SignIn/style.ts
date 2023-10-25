@@ -83,8 +83,17 @@ export const SubmitHelpContainer = styled.div`
 export const CheckRemember = styled.div`
   display: flex;
   padding: 8px 8px 8px 0px;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
+  gap: 4px;
+`;
+
+export const CheckButton = styled.button`
+  width: 20px;
+  height: 20px;
+  &:hover {
+    backgroud: #333;
+  }
 `;
 
 export const CheckTitle = styled.p`
