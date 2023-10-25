@@ -11,7 +11,7 @@ import {
   InputSection,
   Submission,
 } from './styles';
-import imgBack from 'assets/imgs/imgBack.jpg';
+// import * as imgBack from 'assets/imgs/imgBack.jpg';
 import { Link } from 'react-router-dom';
 import { PATH } from 'consts';
 
@@ -34,7 +34,7 @@ export const SignupView: React.FC = () => {
   };
   return (
     <Container>
-      <Ads src={imgBack} />
+      <Ads src="imgs/imgBack.jpg" />
       <FormContainer onSubmit={handleSubmit}>
         <Title>Create an Account</Title>
         <div>
