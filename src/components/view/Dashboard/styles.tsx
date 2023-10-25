@@ -19,3 +19,10 @@ export const GoToLink = styled(Link)`
   font-weight: bold;
   text-decoration: none;
 `;
+
+export const DailyPostSection = styled.div``;
+export const FeaturedSection = styled.div``;
+export const PopularSection = styled.div``;
+export const MainPostSection = styled.div``;
+export const RecentlySection = styled.div``;
+export const OthersSection = styled.div``;

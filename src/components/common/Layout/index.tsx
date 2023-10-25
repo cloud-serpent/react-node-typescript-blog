@@ -17,10 +17,12 @@ export const LayoutComponent: React.FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export const WithLayout = (InputComponent: any) => () => {
+// HOC WithLayout (Higher Order Component)
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const WithLayout = (Component: React.FC) => () => {
   return (
     <LayoutComponent>
-      <InputComponent />
+      <Component />
     </LayoutComponent>
   );
 };

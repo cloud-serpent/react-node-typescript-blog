@@ -15,20 +15,17 @@ import {
 
 import { NavDropdownButton } from './NavDropDown';
 import { PATH } from 'consts';
-
-// import search_small from 'assets/imgs/search_small.png';
-// import extend_small from 'assets/imgs/extend_small.png';
+import { categories, pages } from 'config';
 
 export const HeaderSection: React.FC = () => {
-  const homepageMenu = ['Menu1', 'Menu2'];
-  const categoriesMenu = ['Category1', 'Category2', 'Category3'];
-  const pageMenu = ['Page1', 'Page2', 'Page3', 'Page4'];
+  const categoriesMenu = categories;
+  const pageMenu = pages;
 
   return (
     <Header>
       <NavButtonsGroup className="dropdown">
-        <NavDropdownButton value="Homepages" menu={homepageMenu} />
-        <NavButton to={PATH.NOT_FOUND}>About</NavButton>
+        <NavButton to={PATH.DASHBOARD}>Homepage</NavButton>
+        <NavButton to={PATH.ABOUT}>About</NavButton>
         <NavDropdownButton value="Categories" menu={categoriesMenu} />
         <NavDropdownButton value="Pages" menu={pageMenu} />
       </NavButtonsGroup>
