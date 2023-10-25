@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import {
   Container,
   Ads,
@@ -14,14 +14,23 @@ import {
 // import * as imgBack from 'assets/imgs/imgBack.jpg';
 import { Link } from 'react-router-dom';
 import { PATH } from 'consts';
+import { UserModel } from 'models';
 
 export const SignupView: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmpassword, setConfirmpassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [code, setCode] = useState('');
-  const [username, setUsername] = useState('');
+  const initialState: UserModel = {
+    email: '',
+    password: '',
+    confirmpassword: '',
+    phone: '',
+    code: '',
+    username: '',
+  };
+
+  const [userInfo, setUserInfo] = useState<UserModel>(initialState);
+
+  function onChange(e: ChangeEvent<HTMLInputElement>): void {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,24 +50,24 @@ export const SignupView: React.FC = () => {
             <InputTitle>Email Address</InputTitle>
             <InputItem
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userInfo.email}
+              onChange={onChange}
             />
           </InputGroup>
           <InputGroup>
             <InputTitle>Password</InputTitle>
             <InputItem
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userInfo.password}
+              onChange={onChange}
             />
           </InputGroup>
           <InputGroup>
             <InputTitle>Confirm Password</InputTitle>
             <InputItem
               type="password"
-              value={confirmpassword}
-              onChange={(e) => setConfirmpassword(e.target.value)}
+              value={userInfo.confirmpassword}
+              onChange={onChange}
             />
           </InputGroup>
           <InputRowGroup>
@@ -66,16 +75,16 @@ export const SignupView: React.FC = () => {
               <InputTitle>Phone Number</InputTitle>
               <InputItem
                 type="text"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={userInfo.phone}
+                onChange={onChange}
               />
             </InputGroup>
             <InputGroup>
               <InputTitle>Country code</InputTitle>
               <InputItem
                 type="number"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
+                value={userInfo.code}
+                onChange={onChange}
               />
             </InputGroup>
           </InputRowGroup>
@@ -83,8 +92,8 @@ export const SignupView: React.FC = () => {
             <InputTitle>Display Name</InputTitle>
             <InputItem
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={userInfo.username}
+              onChange={onChange}
             />
           </InputGroup>
         </InputSection>
