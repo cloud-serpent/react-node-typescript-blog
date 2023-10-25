@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin-top: 100px;
-  margin-bottom: 100px;
   margin-right: auto;
   margin-left: auto;
   box-shadow: 1px 1px 2px rgba(0.3, 0.3, 0.3, 0.4);
