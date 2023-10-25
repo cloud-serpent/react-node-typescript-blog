@@ -17,10 +17,10 @@ export const LayoutComponent: React.FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export const WithLayout = (Component: React.FC) => () => {
+export const WithLayout = (InputComponent: any) => () => {
   return (
     <LayoutComponent>
-      <Component />
+      <InputComponent />
     </LayoutComponent>
   );
 };
