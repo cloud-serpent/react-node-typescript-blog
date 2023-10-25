@@ -1,8 +1,8 @@
 import React from 'react';
-import { SignupView } from 'components';
+import { SignupView, WithLayout } from 'components';
 
 const SignUp: React.FC = () => {
   return <SignupView />;
 };
 
-export const SignUpPage = SignUp;
+export const SignUpPage = WithLayout(SignUp);
