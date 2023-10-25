@@ -22,7 +22,12 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+
+    "typeRoots" : ["node_modules/@types", "src/types"],
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "src/index.d.ts",
+  ]
 }
