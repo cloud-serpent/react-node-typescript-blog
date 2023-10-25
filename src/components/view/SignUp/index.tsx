@@ -25,12 +25,7 @@ export const SignupView: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(email);
-    console.log(password);
-    console.log(phone);
-    console.log(code);
-    console.log(username);
-    console.log(confirmpassword);
+    //Do Something here;
   };
   return (
     <Container>
