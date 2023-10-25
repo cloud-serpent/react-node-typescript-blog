@@ -26,7 +26,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   align-self: stretch;
   gap: 32px;
 `;
@@ -34,7 +34,6 @@ export const Content = styled.div`
 export const Title = styled.h1`
   color: #333;
 
-  text-align: center;
   font-family: Poppins;
   font-size: 32px;
   font-style: normal;
@@ -45,23 +44,29 @@ export const Title = styled.h1`
 export const SubmitContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 8px;
 `;
 
 export const SubmitButton = styled.button`
   display: flex;
-  width: 459px;
   height: 56px;
   padding: 14px 0px 15px 0px;
   justify-content: center;
   align-items: center;
   border-radius: 32px;
-  opacity: 0.25;
-  background: #111;
+  // opacity: 0.25;
+  background: linear-gradient(
+    55deg,
+    rgba(255, 154, 154, 1) 0%,
+    rgba(255, 108, 200, 1) 35%,
+    rgba(255, 151, 174, 1) 100%
+  );
+  transition: 0.5s;
 
   &:hover {
-    background: #333;
+    background: rgb(185, 185, 185);
+    box-shadow: 1px 1px 4px rgb(0.2, 0.2, 0.2, 0.4);
   }
 
   color: #fff;

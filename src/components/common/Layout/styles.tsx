@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
-export const LayoutContainer = styled.div`
-  margin-top: 70px;
-`;
+export const LayoutContainer = styled.div``;
 
 export const ContentSection = styled.div`
-  margin-top: 60px;
-  margin-bottom: 60px;
-  height: calc(100% - 120px);
+  margin-top: 90px;
+  margin-bottom: 20px;
+  // height: calc(100% - 120px);
+  padding: 20px 0px;
   overflow: auto;
   display: flex;
   justify-content: center;
