@@ -8,6 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 // create store
 export const store = configureStore({
+  preloadedState: {},
   reducer: Slices,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(sagaMiddleware);
@@ -15,6 +16,8 @@ export const store = configureStore({
 });
 
 sagaMiddleware.run(appSaga);
+
+export * as AppActionTypes from './types';
 
 // root state
 export type RootState = ReturnType<typeof store.getState>;
