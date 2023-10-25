@@ -11,10 +11,6 @@ export function* signInRequestSaga(
   try {
     yield put(AppActions.loading.setLoading());
 
-    // const result: ResponseGenerator = yield call(async () => {
-    //     return await request('auth/signIn', "POST", action.payload.userInfo, false);
-    // });
-
     const result: ResponseGenerator = yield call(request, {
       url: `${process.env.REACT_APP_BACKEND_API_ENDPOINT}/auth/login`,
       method: 'POST',
