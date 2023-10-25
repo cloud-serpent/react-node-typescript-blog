@@ -39,7 +39,7 @@ export const SignupView: React.FC = () => {
         <Title>Create an Account</Title>
         <div>
           Already have an account?
-          <Link to={PATH.NOT_FOUND}>Log in</Link>
+          <Link to={PATH.LOG_IN}>Log in</Link>
         </div>
         <InputSection>
           <InputGroup>
