@@ -18,8 +18,10 @@ export interface SignupFailurePayload {
 
 export interface SignupPayload {
   email: string;
-  name: string;
-  password1: string;
-  password2: string;
+  password: string;
+  confirmpassword: string;
+  phone: string;
+  code: string;
+  username: string;
   callback: any;
 }
