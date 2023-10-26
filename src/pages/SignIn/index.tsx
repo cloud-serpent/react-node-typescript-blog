@@ -45,9 +45,11 @@ const SignIn: React.FC = () => {
           navigate(PATH.DASHBOARD);
         },
         errorAction: (errMsg) => {
-          Object.keys(errMsg).map((item: string) => {
-            alert(errMsg[item]);
-          });
+          if (errMsg) {
+            Object.keys(errMsg).map((item: string) => {
+              alert(errMsg[item]);
+            });
+          }
           setUserInfo(initialState);
         },
       })

@@ -1,9 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { request } from '../../../utils';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { AppActionTypes, AppActions } from '../../store';
+
 import { ResponseGenerator } from 'store/types';
+
+import { request } from '../../../utils';
+import { AppActionTypes, AppActions } from '../../store';
 
 export function* signInRequestSaga(
   action: PayloadAction<AppActionTypes.Auth.GetSignInRequestAction>
@@ -25,6 +27,7 @@ export function* signInRequestSaga(
       action.payload.next();
     }
   } catch (error: unknown) {
+    console.log(error);
     yield put(AppActions.loading.finishLoading());
     if (error instanceof AxiosError) {
       console.log(error.response);
