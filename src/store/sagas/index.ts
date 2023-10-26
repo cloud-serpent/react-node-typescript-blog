@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
-import { todosSaga } from './todos.saga';
+import auth from './auth';
 
 export function* appSaga() {
-  yield all([todosSaga]);
+  yield all([...auth]);
 }

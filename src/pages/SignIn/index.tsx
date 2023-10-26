@@ -1,9 +1,11 @@
-import { SignInView } from 'components';
 import React, { ChangeEvent, useState } from 'react';
-import { WithLayout } from 'components';
 import { useDispatch } from 'react-redux';
-import { AppActions, AppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
+
+import { SignInView, WithLayout } from 'components';
+
+import { AppActions, AppDispatch } from 'store';
+
 import { PATH } from 'consts';
 
 interface UserInfoProps {

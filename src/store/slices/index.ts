@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import todosSlice, { todosActions } from './todos.slice';
+
 import authSlice, { authActions } from './auth.slice';
 import loadingSlice, { loadingActions } from './loading.slice';
 
