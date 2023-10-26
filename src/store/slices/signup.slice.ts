@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  AuthState,
-  SignupFailurePayload,
-  SignupPayload,
-  SignupSuccessPayload,
+  IAuthState,
+  ISignupFailurePayload,
+  ISignupPayload,
+  ISignupSuccessPayload,
 } from 'store/types/signup.type';
 
-const initialState: AuthState = {
+const initialState: IAuthState = {
   isAuthenticated: false,
   pending: false,
   token: '',
@@ -27,18 +27,18 @@ const signupSlice = createSlice({
   name: 'signup',
   initialState: initialState,
   reducers: {
-    signupRequest(state: AuthState, action: PayloadAction<SignupPayload>) {
+    signupRequest(state: IAuthState, action: PayloadAction<ISignupPayload>) {
       state.pending = true;
     },
     signupSuccess(
-      state: AuthState,
-      action: PayloadAction<SignupSuccessPayload>
+      state: IAuthState,
+      action: PayloadAction<ISignupSuccessPayload>
     ) {
       state.pending = false;
     },
     signupFailure(
-      state: AuthState,
-      action: PayloadAction<SignupFailurePayload>
+      state: IAuthState,
+      action: PayloadAction<ISignupFailurePayload>
     ) {
       state.pending = false;
       state.error = action.payload.error;

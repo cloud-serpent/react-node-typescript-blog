@@ -1,22 +1,22 @@
-import { User, ErrorType } from 'types';
+import { IUser, IErrorType } from 'types';
 
-export interface AuthState {
+export interface IAuthState {
   isAuthenticated: boolean;
   pending: boolean;
   token: string;
-  error: ErrorType;
-  user: User;
+  error: IErrorType;
+  user: IUser;
 }
 
-export interface SignupSuccessPayload {
+export interface ISignupSuccessPayload {
   token: string;
 }
 
-export interface SignupFailurePayload {
-  error: ErrorType;
+export interface ISignupFailurePayload {
+  error: IErrorType;
 }
 
-export interface SignupPayload {
+export interface ISignupPayload {
   email: string;
   password: string;
   confirmpassword: string;

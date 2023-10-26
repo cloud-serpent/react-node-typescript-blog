@@ -1,10 +1,10 @@
-export interface User {
+export interface IUser {
   email: string;
   name: string;
   role: number;
 }
 
-export interface ErrorType {
+export interface IErrorType {
   email: string;
   name: string;
   password: string;
