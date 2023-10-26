@@ -12,11 +12,15 @@ import {
   Submission,
 } from './styles';
 // import * as imgBack from 'assets/imgs/imgBack.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PATH } from 'consts';
 import { UserModel } from 'models';
+import { AppActions, useAppDispatch } from 'store';
 
 export const SignupView: React.FC = () => {
+  const signup = () => {
+    navigate(PATH.DASHBOARD);
+  };
   const initialState: UserModel = {
     email: '',
     password: '',
@@ -24,6 +28,7 @@ export const SignupView: React.FC = () => {
     phone: '',
     code: '',
     username: '',
+    callback: signup,
   };
 
   const [userInfo, setUserInfo] = useState<UserModel>(initialState);
@@ -32,9 +37,13 @@ export const SignupView: React.FC = () => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   }
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     //Do Something here;
+    dispatch(AppActions.signup.signupRequest(userInfo));
   };
   return (
     <Container>

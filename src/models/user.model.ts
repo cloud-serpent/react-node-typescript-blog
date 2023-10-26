@@ -5,4 +5,5 @@ export interface UserModel {
   confirmpassword: string;
   phone: string;
   code: string;
+  callback: any;
 }

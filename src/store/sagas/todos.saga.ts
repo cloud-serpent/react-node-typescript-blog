@@ -2,11 +2,10 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { Actions } from '../slices';
 import { request } from 'utils';
 import { ResponseGenerator } from 'store/types';
-import { Todo } from 'types';
 
 function* getTodosListRequest() {
   try {
-    const response: ResponseGenerator<Todo[]> = yield call(request, {
+    const response: ResponseGenerator = yield call(request, {
       url: `https://jsonplaceholder.typicode.com/todos`,
       method: 'GET',
     });
