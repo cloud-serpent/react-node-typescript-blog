@@ -10,10 +10,14 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   preloadedState: {},
   reducer: Slices,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(sagaMiddleware);
-  },
+  middleware: (getDefaultMiddleware: any) =>
+    getDefaultMiddleware({ serializableCheck: false, thunk: false }).concat(
+      sagaMiddleware
+    ),
 });
+
+// export app actions
+export const AppActions = Actions;
 
 sagaMiddleware.run(appSaga);
 
@@ -24,6 +28,3 @@ export type RootState = ReturnType<typeof store.getState>;
 
 // export app dispatch
 export type AppDispatch = typeof store.dispatch;
-
-// export app actions
-export const AppActions = Actions;

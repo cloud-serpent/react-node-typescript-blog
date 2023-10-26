@@ -12,12 +12,12 @@ export function* signInRequestSaga(
     yield put(AppActions.loading.setLoading());
 
     const result: ResponseGenerator = yield call(request, {
-      url: `${process.env.REACT_APP_BACKEND_API_ENDPOINT}/auth/login`,
+      // url: `${process.env.REACT_APP_BACKEND_API_ENDPOINT}/auth/login`,
+      url: `http://localhost:8000/api/v1/auth/login`,
       method: 'POST',
       data: action.payload.userInfo,
       isTokenIncluded: false,
     });
-
     yield put(AppActions.loading.finishLoading());
     yield put(AppActions.auth.setToken(<any>result.data));
 
@@ -26,8 +26,8 @@ export function* signInRequestSaga(
     }
   } catch (error: unknown) {
     yield put(AppActions.loading.finishLoading());
-
     if (error instanceof AxiosError) {
+      console.log(error.response);
       const reasonCode: string = error.response?.data.reason;
       if (action.payload.errorAction) {
         action.payload.errorAction(error.response?.data.message);

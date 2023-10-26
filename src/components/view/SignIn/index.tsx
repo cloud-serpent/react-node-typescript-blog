@@ -82,7 +82,7 @@ export const SignInView: React.FC<SignInViewProps> = (props) => {
             onChangeExtra={props.onChangePassword}
           />
           <SubmitContainer>
-            <SubmitButton>Sign in</SubmitButton>
+            <SubmitButton onClick={props.onSubmit}>Sign in</SubmitButton>
             <SubmitHelpContainer>
               <CheckRemember>
                 <CheckButton onClick={props.onChangeRemember}>
