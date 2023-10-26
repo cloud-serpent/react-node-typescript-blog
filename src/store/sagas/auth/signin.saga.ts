@@ -19,7 +19,7 @@ export function* signInRequestSaga(
     });
 
     yield put(AppActions.loading.finishLoading());
-    yield put(AppActions.auth.setToken((<any>result.data).token));
+    yield put(AppActions.auth.setToken(<any>result.data));
 
     if (action.payload.next) {
       action.payload.next();

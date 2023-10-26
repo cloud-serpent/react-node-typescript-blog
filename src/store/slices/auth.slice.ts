@@ -21,8 +21,9 @@ const authSlice = createSlice({
       action: PayloadAction<AppActionTypes.Auth.GetSignInRequestAction>
     ) {},
 
-    setToken(state: AuthState, action: PayloadAction<string>) {
-      state.token = action.payload;
+    setToken(state: AuthState, action: PayloadAction<any>) {
+      state.token = action.payload.token;
+      state.user = action.payload.user;
       localStorage.setItem('token', action.payload);
     },
   },
