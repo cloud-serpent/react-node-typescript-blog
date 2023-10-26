@@ -9,7 +9,7 @@ export function* singupSaga(action: any) {
       async () => await api().post('/users', action.payload)
     );
     if (result.data) {
-      yield put(Actions.signup.signupSuccess(result.data.token));
+      yield put(Actions.signup.signupSuccess(result.data));
     }
   } catch (e: any) {
     console.log(e);
@@ -18,7 +18,7 @@ export function* singupSaga(action: any) {
 }
 
 function* authSaga() {
-  yield takeLatest(Actions.signup.signupRequest, singupSaga);
+  yield takeLatest(Actions.signup.signupRequest.type, singupSaga);
 }
 
 export default authSaga;
