@@ -25,9 +25,9 @@ export const SignupView: React.FC = () => {
     email: '',
     password: '',
     confirmpassword: '',
-    phone: '',
-    code: '',
-    username: '',
+    phoneNumber: '',
+    countryCode: '',
+    displayName: '',
     callback: signup,
   };
 
@@ -59,6 +59,7 @@ export const SignupView: React.FC = () => {
             <InputTitle>Email Address</InputTitle>
             <InputItem
               type="email"
+              name="email"
               value={userInfo.email}
               onChange={onChange}
             />
@@ -67,6 +68,7 @@ export const SignupView: React.FC = () => {
             <InputTitle>Password</InputTitle>
             <InputItem
               type="password"
+              name="password"
               value={userInfo.password}
               onChange={onChange}
             />
@@ -75,24 +77,27 @@ export const SignupView: React.FC = () => {
             <InputTitle>Confirm Password</InputTitle>
             <InputItem
               type="password"
+              name="confirmpassword"
               value={userInfo.confirmpassword}
               onChange={onChange}
             />
           </InputGroup>
           <InputRowGroup>
             <InputGroup>
-              <InputTitle>Phone Number</InputTitle>
+              <InputTitle>Country code</InputTitle>
               <InputItem
                 type="text"
-                value={userInfo.phone}
+                name="countryCode"
+                value={userInfo.countryCode}
                 onChange={onChange}
               />
             </InputGroup>
             <InputGroup>
-              <InputTitle>Country code</InputTitle>
+              <InputTitle>Phone Number</InputTitle>
               <InputItem
-                type="number"
-                value={userInfo.code}
+                type="text"
+                name="phoneNumber"
+                value={userInfo.phoneNumber}
                 onChange={onChange}
               />
             </InputGroup>
@@ -101,7 +106,8 @@ export const SignupView: React.FC = () => {
             <InputTitle>Display Name</InputTitle>
             <InputItem
               type="text"
-              value={userInfo.username}
+              name="displayName"
+              value={userInfo.displayName}
               onChange={onChange}
             />
           </InputGroup>

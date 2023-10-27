@@ -34,6 +34,7 @@ const signupSlice = createSlice({
       state: IAuthState,
       action: PayloadAction<ISignupSuccessPayload>
     ) {
+      state.user = action.payload;
       state.pending = false;
     },
     signupFailure(

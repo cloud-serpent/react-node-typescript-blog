@@ -65,7 +65,7 @@ export const InputGroup = styled.div`
 export const InputRowGroup = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 70% auto;
+  grid-template-columns: 30% auto;
   gap: 10px;
 `;
 

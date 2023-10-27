@@ -1,11 +1,11 @@
-import { IUser, IErrorType } from 'types';
+import { IErrorType } from 'types';
 
 export interface IAuthState {
   isAuthenticated: boolean;
   pending: boolean;
   token: string;
   error: IErrorType;
-  user: IUser;
+  user: any;
 }
 
 export interface ISignupSuccessPayload {
@@ -20,8 +20,8 @@ export interface ISignupPayload {
   email: string;
   password: string;
   confirmpassword: string;
-  phone: string;
-  code: string;
-  username: string;
+  phoneNumber: string;
+  countryCode: string;
+  displayName: string;
   callback: any;
 }

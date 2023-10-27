@@ -6,7 +6,7 @@ const api = (multipart?: boolean) => {
         multipart ? 'multipart/form-data' : 'application/json'
       }`,
     },
-    baseURL: 'http://localhost: 3001/api/v1',
+    baseURL: 'http://localhost:8000/api/v1',
     timeout: 60000,
   });
 
