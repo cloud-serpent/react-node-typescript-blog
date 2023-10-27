@@ -4,12 +4,16 @@ import { signupReducers, signupActions } from './signup.slice';
 
 import authSlice, { authActions } from './auth.slice';
 import loadingSlice, { loadingActions } from './loading.slice';
+import postsSlice, { postsActions } from './posts.slice';
+import errorsSlice, { errorsActions } from './error.slice';
 
 export const Slices = combineReducers({
   todos: todosSlice.reducer,
   auth: authSlice.reducer,
   signup: signupReducers,
   loading: loadingSlice.reducer,
+  posts: postsSlice.reducer,
+  errors: errorsSlice.reducer,
 });
 
 export const Actions = {
@@ -17,4 +21,6 @@ export const Actions = {
   signup: signupActions,
   auth: authActions,
   loading: loadingActions,
+  posts: postsActions,
+  errors: errorsActions,
 };
