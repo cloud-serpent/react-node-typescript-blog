@@ -1,6 +1,12 @@
-import { SignInView } from 'components';
 import React, { ChangeEvent, useState } from 'react';
-import { WithLayout } from 'components';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { SignInView, WithLayout } from 'components';
+
+import { AppActions, AppDispatch } from 'store';
+
+import { PATH } from 'consts';
 
 interface UserInfoProps {
   email: string;
@@ -8,6 +14,8 @@ interface UserInfoProps {
 }
 
 const SignIn: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const initialState: UserInfoProps = {
     email: '',
     password: '',
@@ -28,7 +36,25 @@ const SignIn: React.FC = () => {
     setPasswordState(!passwordState);
   }
 
-  function onSubmit() {}
+  function onSubmit() {
+    dispatch(
+      AppActions.auth.signInRequest({
+        userInfo: userInfo,
+        next: () => {
+          alert('sign in successfully');
+          navigate(PATH.DASHBOARD);
+        },
+        errorAction: (errMsg) => {
+          if (errMsg) {
+            Object.keys(errMsg).map((item: string) => {
+              alert(errMsg[item]);
+            });
+          }
+          setUserInfo(initialState);
+        },
+      })
+    );
+  }
 
   return (
     <SignInView

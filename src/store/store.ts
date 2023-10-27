@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+
 import { Slices, Actions } from './slices';
 import { appSaga } from './sagas';
 
@@ -20,6 +21,8 @@ export const store = configureStore({
 export const AppActions = Actions;
 
 sagaMiddleware.run(appSaga);
+
+export * as AppActionTypes from './types';
 
 // root state
 export type RootState = ReturnType<typeof store.getState>;

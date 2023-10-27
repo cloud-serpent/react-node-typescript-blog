@@ -15,7 +15,7 @@ function* getTodosListRequest() {
 
     yield put(
       Actions.todos.getTodosListSuccess({
-        todos: responseData,
+        todos: <any>responseData,
       })
     );
   } catch (err) {
