@@ -52,10 +52,25 @@ export function* updatePost(action: any) {
   }
 }
 
+export function* deletePost(action: any) {
+  try {
+    const result: ResponseGenerator = yield call(
+      async () => await api().delete(`/posts/${action.payload.id}`)
+    );
+    if (result.data) {
+      action.payload.callback();
+    }
+  } catch (e: any) {
+    if (e.response)
+      yield put(AppActions.errors.getErrors(e.response.data.message));
+  }
+}
+
 function* postsSaga() {
   yield takeLatest(AppActions.posts.getMyPostRequest, getMyPost);
   yield takeLatest(AppActions.posts.createPostRequest, createNewPost);
   yield takeLatest(AppActions.posts.updatePostRequest, updatePost);
+  yield takeLatest(AppActions.posts.deletePostRequest, deletePost);
 }
 
 export default postsSaga;

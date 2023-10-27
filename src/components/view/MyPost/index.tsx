@@ -74,17 +74,30 @@ export const MyPostView: React.FC = () => {
       );
     setLoad(true);
   }, [load]);
+  const callback = () => {
+    dispatch(
+      AppActions.posts.getMyPostRequest({
+        page: posts.page,
+        list: posts.list,
+      })
+    );
+  };
+
   const handlePost = () => {
     dispatch(
       AppActions.posts.updatePostRequest({
         ...state,
-        callback: () =>
-          dispatch(
-            AppActions.posts.getMyPostRequest({
-              page: posts.page,
-              list: posts.list,
-            })
-          ),
+        callback: callback,
+      })
+    );
+  };
+  const handleDelete = (e: BaseSyntheticEvent) => {
+    const index = Number(e.target.id);
+    const id = posts.posts[index].id;
+    dispatch(
+      AppActions.posts.deletePostRequest({
+        id,
+        callback: callback,
       })
     );
   };
@@ -113,6 +126,7 @@ export const MyPostView: React.FC = () => {
             id={index}
             key={index}
             onEdit={handleEdit}
+            onDelete={handleDelete}
           />
         ))}
         <Pagination>

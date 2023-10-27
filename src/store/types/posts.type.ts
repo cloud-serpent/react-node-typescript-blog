@@ -34,3 +34,8 @@ export type IUpdatePostPayload = {
   attachments: string;
   callback: any;
 };
+
+export type IDeletePostPayload = {
+  id: number;
+  callback: any;
+};

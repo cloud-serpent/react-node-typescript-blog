@@ -15,6 +15,7 @@ import { Pass, Pending, Block, Calendar, Edit, Delete } from 'assets/svg';
 
 interface PostItemProps extends Post {
   onEdit: MouseEventHandler;
+  onDelete: MouseEventHandler;
 }
 
 export const PostListItem: React.FC<PostItemProps> = ({
@@ -24,6 +25,7 @@ export const PostListItem: React.FC<PostItemProps> = ({
   status,
   createdAt,
   onEdit,
+  onDelete,
   id,
 }) => {
   return (
@@ -47,8 +49,8 @@ export const PostListItem: React.FC<PostItemProps> = ({
           <IButton onClick={onEdit} id={String(id)}>
             <Edit id={String(id)} />
           </IButton>
-          <IButton>
-            <Delete />
+          <IButton onClick={onDelete} id={String(id)}>
+            <Delete id={String(id)} />
           </IButton>
         </PostActionContainer>
       </PostItemContainer>

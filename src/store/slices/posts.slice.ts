@@ -50,6 +50,10 @@ const postsSlice = createSlice({
       state: PostState,
       action: PayloadAction<Posts.IUpdatePostPayload>
     ) {},
+    deletePostRequest(
+      state: PostState,
+      action: PayloadAction<Posts.IDeletePostPayload>
+    ) {},
   },
 });
 
