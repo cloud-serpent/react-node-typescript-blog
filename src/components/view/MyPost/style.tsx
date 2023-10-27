@@ -43,35 +43,6 @@ export const PostContainer = styled.div`
   }
 `;
 
-export const PostImg = styled.div<{ $width?: string; $height?: string }>`
-  min-width: ${(props) => props.$width || '260px'};
-  min-height: ${(props) => props.$height || '180px'};
-  border-radius: 8px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const PostImgContent = styled.img<{ $width?: string; $height?: string }>`
-  max-width: ${(props) => props.$width || '260px'};
-  max-height: ${(props) => props.$height || '180px'};
-  border-radius: 8px;
-  &::before {
-    content: '';
-    border-radius: 8px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    max-width: ${(props) => props.$width || '260px'};
-    max-height: ${(props) => props.$height || '180px'};
-    background-color: #333;
-  }
-  background-color: #333;
-`;
-
 export const IButton = styled.button<{ $rounded?: boolean }>`
   background: #fff;
   border: none;
@@ -84,41 +55,6 @@ export const IButton = styled.button<{ $rounded?: boolean }>`
   }
   &:hover {
     box-shadow: 1px 1px 5px #333;
-  }
-`;
-
-export const UploadButton = styled(IButton)`
-  position: absolute;
-  top: 0px;
-  left: 0px;
-`;
-
-export const PostInput = styled.input`
-  border: 1px solid #94d7d3;
-  border-radius: 5px;
-  padding: 15px;
-  font-size: 15px;
-  font-weight: 500;
-  width: 100%;
-  &:focus {
-    outline: none;
-    box-shadow: 0px 0px 5px #94d7d3;
-  }
-`;
-
-export const PostTextArea = styled.textarea`
-  border: 1px solid #94d7d3;
-  border-radius: 5px;
-  padding-left: 15px;
-  padding-top: 15px;
-  font-size: 15px;
-  font-weight: 500;
-  max-width: 100%;
-  min-width: 100%;
-  height: 300px;
-  &:focus {
-    outline: none;
-    box-shadow: 0px 0px 5px #94d7d3;
   }
 `;
 
@@ -145,4 +81,117 @@ export const PageButton = styled.button<{ $selected?: boolean }>`
   &:hover {
     box-shadow: 5px 5px 5px #333;
   }
+`;
+
+export const PostHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+`;
+
+export const ImageUploadWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  height: 200px;
+  background-color: #666;
+  border-radius: 8px;
+  position: relative;
+`;
+export const UploadLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background-color: #666;
+  border-radius: 8px;
+  font-size: 72px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+export const ImagePreview = styled.img`
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  z-index: 10;
+`;
+
+export const FileInput = styled.input`
+  display: none;
+`;
+
+export const PostInput = styled.input`
+  border: 1px solid #94d7d3;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 500;
+  width: 100%;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px #94d7d3;
+  }
+`;
+
+export const PostTextArea = styled.textarea`
+  border: 1px solid #94d7d3;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-top: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  max-width: 100%;
+  min-width: 100%;
+  height: 400px;
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px #94d7d3;
+  }
+`;
+
+export const IconButton = styled.button`
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border: 1px solid #94d7d3;
+  border-radius: 26px;
+  background-color: transparent;
+  cursor: pointer;
+  color: #94d7d3;
+  transition: all 0.2s ease-in-out;
+  margin-right: 0px;
+
+  &:hover {
+    background-color: #94d7d399;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #94d7d3;
+  }
+
+  & > svg {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+export const EditContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  gap: 10px;
 `;

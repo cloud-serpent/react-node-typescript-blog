@@ -2,14 +2,18 @@ import React, { BaseSyntheticEvent, ChangeEvent, useState } from 'react';
 import {
   Post,
   PostContainer,
-  PostImg,
-  PostImgContent,
   EditPost,
   PostInput,
   PostTextArea,
-  UploadButton,
   Pagination,
   PageButton,
+  IconButton,
+  PostHeader,
+  ImageUploadWrapper,
+  ImagePreview,
+  UploadLabel,
+  FileInput,
+  EditContainer,
 } from './style';
 import { PostListItem } from 'components/common';
 import { RootState, useAppSelector } from 'store';
@@ -35,14 +39,29 @@ export const MyPostView: React.FC = () => {
       body: posts.posts[index].body,
     });
   };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setState({ ...state, attachments: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const selectClear = () => {
+    setState({ ...state, attachments: '' });
+  };
   return (
     <Post>
       <PostContainer>
         {posts.posts.map((item, index) => (
           <PostListItem
             attachment={item.attachment}
-            title={item.title}
-            body={item.body}
+            title={item.title.slice(0, 40) + '...'}
+            body={item.body.slice(0, 100) + '...'}
             status={item.status}
             createdAt={item.createdAt}
             id={String(index)}
@@ -75,10 +94,10 @@ export const MyPostView: React.FC = () => {
             </svg>
           </PageButton>
           {posts.page > 1 ? <PageButton>{posts.page - 1}</PageButton> : ''}
-          <PageButton>{posts.page}</PageButton>
+          <PageButton $selected>{posts.page}</PageButton>
           <PageButton>{posts.page + 1}</PageButton>
           ...
-          <PageButton>6</PageButton>
+          <PageButton>{posts.total}</PageButton>
           <PageButton>
             <svg
               width="46px"
@@ -101,46 +120,36 @@ export const MyPostView: React.FC = () => {
         </Pagination>
       </PostContainer>
       <EditPost>
-        <PostImg $width="100%">
-          <PostImgContent
-            src={state.attachments}
-            $width="100%"
-            $height="100%"
+        <PostHeader>
+          <EditContainer>
+            <ImageUploadWrapper>
+              {state.attachments && (
+                <ImagePreview
+                  src={state.attachments}
+                  alt="Preview"
+                  onClick={selectClear}
+                />
+              )}
+              <UploadLabel htmlFor="image-upload">+</UploadLabel>
+              <FileInput
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </ImageUploadWrapper>
+            <IconButton>+ Edit Post</IconButton>
+          </EditContainer>
+          <PostInput
+            name="title"
+            placeholder="Title"
+            onChange={handleStateChange}
+            value={state.title}
           />
-          <UploadButton $rounded>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              width="26"
-              height="26"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="m3.99 16.854-1.314 3.504a.75.75 0 0 0 .966.965l3.503-1.314a3 3 0 0 0 1.068-.687L18.36 9.175s-.354-1.061-1.414-2.122c-1.06-1.06-2.122-1.414-2.122-1.414L4.677 15.786a3 3 0 0 0-.687 1.068zm12.249-12.63 1.383-1.383c.248-.248.579-.406.925-.348.487.08 1.232.322 1.934 1.025.703.703.945 1.447 1.025 1.934.058.346-.1.677-.348.925L19.774 7.76s-.353-1.06-1.414-2.12c-1.06-1.062-2.121-1.415-2.121-1.415z"
-                  fill="#000000"
-                ></path>
-              </g>
-            </svg>
-          </UploadButton>
-        </PostImg>
-        <PostInput
-          placeholder="title"
-          name="title"
-          onChange={handleStateChange}
-          value={state.title}
-        />
+        </PostHeader>
         <PostTextArea
-          placeholder="body"
           name="body"
+          placeholder="Enter the content..."
           onChange={handleStateChange}
           value={state.body}
         />

@@ -10,6 +10,8 @@ import {
   TodosListPage,
   SignInPage,
   SignUpPage,
+  MyPostPage,
+  CreatePostPage,
 } from 'pages';
 
 export const App: React.FC = () => {
@@ -22,6 +24,8 @@ export const App: React.FC = () => {
           <Route path={PATH.NOT_FOUND} element={<NotFoundPage />} />
           <Route path={PATH.SIGN_IN} element={<SignInPage />} />
           <Route path={PATH.SIGN_UP} element={<SignUpPage />} />
+          <Route path={PATH.POST} element={<MyPostPage />} />
+          <Route path={PATH.CREATE_POST} element={<CreatePostPage />} />
         </Routes>
       </BrowserRouter>
     </Provider>
