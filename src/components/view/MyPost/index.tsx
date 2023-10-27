@@ -1,4 +1,9 @@
-import React, { BaseSyntheticEvent, ChangeEvent, useState } from 'react';
+import React, {
+  BaseSyntheticEvent,
+  ChangeEvent,
+  useEffect,
+  useState,
+} from 'react';
 import {
   Post,
   PostContainer,
@@ -16,7 +21,7 @@ import {
   EditContainer,
 } from './style';
 import { PostListItem } from 'components/common';
-import { RootState, useAppSelector } from 'store';
+import { AppActions, RootState, useAppDispatch, useAppSelector } from 'store';
 
 export const MyPostView: React.FC = () => {
   const posts = useAppSelector((state: RootState) => state.posts);
@@ -24,6 +29,7 @@ export const MyPostView: React.FC = () => {
     attachments: '',
     body: '',
     title: '',
+    id: 0,
   });
   const handleStateChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -37,6 +43,7 @@ export const MyPostView: React.FC = () => {
       attachments: posts.posts[index].attachment || '',
       title: posts.posts[index].title,
       body: posts.posts[index].body,
+      id: posts.posts[index].id,
     });
   };
 
@@ -54,6 +61,45 @@ export const MyPostView: React.FC = () => {
   const selectClear = () => {
     setState({ ...state, attachments: '' });
   };
+
+  const dispatch = useAppDispatch();
+  const [load, setLoad] = useState(false);
+  useEffect(() => {
+    if (load == false)
+      dispatch(
+        AppActions.posts.getMyPostRequest({
+          page: posts.page,
+          list: posts.list,
+        })
+      );
+    setLoad(true);
+  }, [load]);
+  const handlePost = () => {
+    dispatch(
+      AppActions.posts.updatePostRequest({
+        ...state,
+        callback: () =>
+          dispatch(
+            AppActions.posts.getMyPostRequest({
+              page: posts.page,
+              list: posts.list,
+            })
+          ),
+      })
+    );
+  };
+  const handlePrevPage = () => {
+    const prev = posts.page == 1 ? 1 : posts.page - 1;
+    dispatch(
+      AppActions.posts.getMyPostRequest({ page: prev, list: posts.list })
+    );
+  };
+  const handleNextPage = () => {
+    const next = posts.page == posts.total ? posts.total : posts.page + 1;
+    dispatch(
+      AppActions.posts.getMyPostRequest({ page: next, list: posts.list })
+    );
+  };
   return (
     <Post>
       <PostContainer>
@@ -64,13 +110,13 @@ export const MyPostView: React.FC = () => {
             body={item.body.slice(0, 100) + '...'}
             status={item.status}
             createdAt={item.createdAt}
-            id={String(index)}
+            id={index}
             key={index}
             onEdit={handleEdit}
           />
         ))}
         <Pagination>
-          <PageButton>
+          <PageButton onClick={handlePrevPage}>
             <svg
               width="46px"
               height="46px"
@@ -93,12 +139,46 @@ export const MyPostView: React.FC = () => {
               </g>
             </svg>
           </PageButton>
-          {posts.page > 1 ? <PageButton>{posts.page - 1}</PageButton> : ''}
+          {posts.page > 1 ? (
+            <PageButton
+              onClick={() =>
+                dispatch(
+                  AppActions.posts.getMyPostRequest({
+                    page: posts.page - 1,
+                    list: posts.list,
+                  })
+                )
+              }
+            >
+              {posts.page - 1}
+            </PageButton>
+          ) : (
+            ''
+          )}
           <PageButton $selected>{posts.page}</PageButton>
-          <PageButton>{posts.page + 1}</PageButton>
-          ...
-          <PageButton>{posts.total}</PageButton>
-          <PageButton>
+          {posts.page + 1 < posts.total ? (
+            <PageButton
+              onClick={() =>
+                dispatch(
+                  AppActions.posts.getMyPostRequest({
+                    page: posts.page + 1,
+                    list: posts.list,
+                  })
+                )
+              }
+            >
+              {posts.page + 1}
+            </PageButton>
+          ) : (
+            ''
+          )}
+          {posts.total > 1 ? '...' : ''}
+          {posts.page < posts.total ? (
+            <PageButton>{posts.total}</PageButton>
+          ) : (
+            ''
+          )}
+          <PageButton onClick={handleNextPage}>
             <svg
               width="46px"
               height="46px"
@@ -138,7 +218,7 @@ export const MyPostView: React.FC = () => {
                 onChange={handleImageChange}
               />
             </ImageUploadWrapper>
-            <IconButton>+ Edit Post</IconButton>
+            <IconButton onClick={handlePost}>+ Edit Post</IconButton>
           </EditContainer>
           <PostInput
             name="title"

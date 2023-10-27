@@ -9,6 +9,7 @@ export type IGetMyPostRequestPayload = {
 
 export type IGetMyPostSuccessPayload = {
   posts: Post[];
+  total: number;
 };
 
 export type ICreateNewPostRequestPayload = {
@@ -24,4 +25,12 @@ export type ICreateNewPostSuccessPayload = {
 
 export type ICreateNewPostFailurePayload = {
   error: any;
+};
+
+export type IUpdatePostPayload = {
+  id: number;
+  title: string;
+  body: string;
+  attachments: string;
+  callback: any;
 };

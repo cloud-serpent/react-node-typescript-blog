@@ -11,56 +11,10 @@ type PostState = {
 };
 
 const initialState: PostState = {
-  posts: [
-    {
-      attachment: '/imgs/bg (1).jpg',
-      title:
-        "I Created a Developer Rap Video - Here's What I Learned from it. Check it out",
-      body: 'Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp',
-      status: 'PENDING',
-      createdAt: '10-26-2022',
-      id: '1',
-    },
-    {
-      attachment: '/imgs/bg (2).jpg',
-      title:
-        "I Created a Developer Rap Video - Here's What I Learned from it. Check it out",
-      body: 'Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp',
-      status: 'PENDING',
-      createdAt: '10-26-2022',
-      id: '1',
-    },
-    {
-      attachment: '/imgs/bg (3).jpg',
-      title:
-        "I Created a Developer Rap Video - Here's What I Learned from it. Check it out",
-      body: 'Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp',
-      status: 'PENDING',
-      createdAt: '10-26-2022',
-      id: '1',
-    },
-    {
-      attachment: '/imgs/bg (4).jpg',
-      title:
-        "I Created a Developer Rap Video - Here's What I Learned from it. Check it out",
-      body: 'Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp',
-      status: 'PENDING',
-      createdAt: '10-26-2022',
-      id: '1',
-    },
-    {
-      attachment: '/imgs/bg (5).jpg',
-      title:
-        "I Created a Developer Rap Video - Here's What I Learned from it. Check it out",
-      body: 'Did you come here for something in particular or just general Riker-bashing? And blowing into maximum warp',
-      status: 'PENDING',
-      createdAt: '10-26-2022',
-      id: '1',
-    },
-  ],
+  posts: [],
   page: 1,
-  list: 0,
-  total: 5,
+  list: 5,
+  total: 0,
 };
 
 const postsSlice = createSlice({
@@ -80,19 +34,22 @@ const postsSlice = createSlice({
       action: PayloadAction<Posts.IGetMyPostSuccessPayload>
     ) {
       state.posts = action.payload.posts;
+      state.total = action.payload.total;
     },
     createPostRequest(
       state: PostState,
       action: PayloadAction<Posts.ICreateNewPostRequestPayload>
-    ) {
-      return;
-    },
+    ) {},
     createPostSuccess(
       state: PostState,
       action: PayloadAction<Posts.ICreateNewPostSuccessPayload>
     ) {
       state.posts = [action.payload.posts];
     },
+    updatePostRequest(
+      state: PostState,
+      action: PayloadAction<Posts.IUpdatePostPayload>
+    ) {},
   },
 });
 

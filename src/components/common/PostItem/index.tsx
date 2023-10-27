@@ -44,8 +44,8 @@ export const PostListItem: React.FC<PostItemProps> = ({
           )}
           <Calendar />
           <PostDate>{createdAt}</PostDate>
-          <IButton onClick={onEdit} id={id}>
-            <Edit id={id} />
+          <IButton onClick={onEdit} id={String(id)}>
+            <Edit id={String(id)} />
           </IButton>
           <IButton>
             <Delete />

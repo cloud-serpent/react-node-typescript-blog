@@ -12,7 +12,6 @@ import {
 } from './style';
 import { AppActions, useAppDispatch } from 'store';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from 'consts';
 
 export const CreatePostView: React.FC = () => {
   const [state, setState] = useState({
@@ -50,8 +49,6 @@ export const CreatePostView: React.FC = () => {
       body: '',
       attachments: '',
     });
-    navigate(PATH.POST);
-    console.log('OK');
   };
 
   const dispatch = useAppDispatch();
