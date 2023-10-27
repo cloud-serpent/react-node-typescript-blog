@@ -10,6 +10,9 @@ import {
   UploadLabel,
   IconButton,
 } from './style';
+import { AppActions, useAppDispatch } from 'store';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from 'consts';
 
 export const CreatePostView: React.FC = () => {
   const [state, setState] = useState({
@@ -39,6 +42,24 @@ export const CreatePostView: React.FC = () => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
+
+  const callback = () => {
+    setState({
+      title: '',
+      body: '',
+      attachments: '',
+    });
+    navigate(PATH.POST);
+    console.log('OK');
+  };
+
+  const dispatch = useAppDispatch();
+
+  const createPost = () => {
+    dispatch(AppActions.posts.createPostRequest({ ...state, callback }));
+  };
+
   return (
     <PostContainer>
       <PostHeader>
@@ -63,7 +84,7 @@ export const CreatePostView: React.FC = () => {
           placeholder="Title"
           onChange={handleStateChange}
         />
-        <IconButton>+ Create Post</IconButton>
+        <IconButton onClick={createPost}>+ Create Post</IconButton>
       </PostHeader>
       <PostTextArea
         name="body"

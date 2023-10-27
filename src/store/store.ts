@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-
 import { Slices, Actions } from './slices';
 import { appSaga } from './sagas';
 
@@ -15,6 +14,7 @@ export const store = configureStore({
     getDefaultMiddleware({ serializableCheck: false, thunk: false }).concat(
       sagaMiddleware
     ),
+  // enhancers: [composeWithDevTools()]
 });
 
 // export app actions

@@ -179,7 +179,6 @@ export const IconButton = styled.button`
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #94d7d3;
   }
 
   & > svg {
@@ -195,3 +194,5 @@ export const EditContainer = styled.div`
   width: 100%;
   gap: 10px;
 `;
+
+export const DeleteModal = styled.div``;

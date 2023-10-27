@@ -10,25 +10,29 @@ export function* getMyPost(action: any) {
     });
     if (result.data) {
       yield put(AppActions.posts.getMyPostSuccess({ posts: result.data }));
-      yield put(AppActions.errors.clearErrors);
+      //yield put(AppActions.errors.clearErrors);
     }
   } catch (e: any) {
-    yield put(AppActions.errors.getErrors(e.response.data.message));
+    console.log(e);
+    if (e.response)
+      yield put(AppActions.errors.getErrors(e.response.data.message));
   }
 }
 
 export function* createNewPost(action: any) {
   try {
-    const result: ResponseGenerator = yield call(async () => {
-      await api().post('/posts', action.payload);
-    });
+    const result: ResponseGenerator = yield call(
+      async () => await api().post('/posts', action.payload)
+    );
+    console.log(result);
     if (result.data) {
       yield put(AppActions.posts.createPostSuccess({ posts: result.data }));
-      yield put(AppActions.errors.clearErrors);
+      yield put(AppActions.errors.clearErrors());
     }
     action.payload.callback();
   } catch (e: any) {
-    yield put(AppActions.errors.getErrors(e.response.data.message));
+    if (e.response)
+      yield put(AppActions.errors.getErrors(e.response.data.message));
   }
 }
 function* postsSaga() {

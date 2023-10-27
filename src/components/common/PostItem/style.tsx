@@ -62,6 +62,7 @@ export const PostImg = styled.div<{ $width?: string; $height?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #666;
 `;
 
 export const PostImgContent = styled.img<{ $width?: string; $height?: string }>`

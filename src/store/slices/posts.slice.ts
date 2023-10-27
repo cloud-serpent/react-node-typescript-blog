@@ -90,7 +90,9 @@ const postsSlice = createSlice({
     createPostSuccess(
       state: PostState,
       action: PayloadAction<Posts.ICreateNewPostSuccessPayload>
-    ) {},
+    ) {
+      state.posts = [action.payload.posts];
+    },
   },
 });
 
