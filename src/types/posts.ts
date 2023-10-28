@@ -4,5 +4,5 @@ export interface Post {
   body: string;
   status: string;
   createdAt: string;
-  id: number;
+  id: number | null;
 }

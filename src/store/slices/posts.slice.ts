@@ -34,6 +34,15 @@ const postsSlice = createSlice({
       action: PayloadAction<Posts.IGetMyPostSuccessPayload>
     ) {
       state.posts = action.payload.posts;
+      while (state.posts.length < state.list) {
+        state.posts.push({
+          title: '',
+          body: '',
+          status: '',
+          createdAt: '',
+          id: null,
+        });
+      }
       state.total = action.payload.total;
     },
     createPostRequest(

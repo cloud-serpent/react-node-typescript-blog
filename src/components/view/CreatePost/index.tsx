@@ -20,20 +20,29 @@ export const CreatePostView: React.FC = () => {
     attachments: '',
   });
 
+  const [image, setImage] = useState<File | null>(null);
+  const [show, setShow] = useState('');
+
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('asfd');
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
+      const date = new Date(Date.now());
+      const saveAs = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${
+        file.name
+      }`;
       reader.onloadend = () => {
-        console.log(reader.result as string);
-        setState({ ...state, attachments: reader.result as string });
+        setState({ ...state, attachments: saveAs });
+        setShow(reader.result as string);
+        setImage(file);
       };
       reader.readAsDataURL(file);
     }
   };
 
   const selectClear = () => {
+    setImage(null);
+    setShow('');
     setState({ ...state, attachments: '' });
   };
 
@@ -46,16 +55,14 @@ export const CreatePostView: React.FC = () => {
   const navigate = useNavigate();
 
   const callback = () => {
-    setState({
-      title: '',
-      body: '',
-      attachments: '',
-    });
+    setState({ ...state, title: '', body: '', attachments: '' });
+    selectClear();
   };
 
   const dispatch = useAppDispatch();
 
   const createPost = () => {
+    dispatch(AppActions.upload.uploadRequest({ avatar: image }));
     dispatch(AppActions.posts.createPostRequest({ ...state, callback }));
   };
 
@@ -63,12 +70,8 @@ export const CreatePostView: React.FC = () => {
     <PostContainer>
       <PostHeader>
         <ImageUploadWrapper>
-          {state.attachments && (
-            <ImagePreview
-              src={state.attachments}
-              alt="Preview"
-              onClick={selectClear}
-            />
+          {show && (
+            <ImagePreview src={show} alt="Preview" onClick={selectClear} />
           )}
           <UploadLabel htmlFor="image-upload">+</UploadLabel>
           <FileInput
@@ -82,6 +85,7 @@ export const CreatePostView: React.FC = () => {
           name="title"
           placeholder="Title"
           onChange={handleStateChange}
+          value={state.title}
         />
         <IconButton onClick={createPost}>+ Create Post</IconButton>
       </PostHeader>
@@ -89,6 +93,7 @@ export const CreatePostView: React.FC = () => {
         name="body"
         placeholder="Enter the content..."
         onChange={handleStateChange}
+        value={state.body}
       />
     </PostContainer>
   );

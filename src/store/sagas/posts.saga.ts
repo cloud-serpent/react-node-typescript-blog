@@ -11,7 +11,6 @@ export function* getMyPost(action: any) {
           `/posts/post/user?page=${action.payload.page}&listNum=${action.payload.list}`
         )
     );
-    console.log(result.data);
     if (result.data) {
       yield put(AppActions.posts.getMyPostSuccess(result.data));
       yield put(AppActions.errors.clearErrors());

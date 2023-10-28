@@ -23,6 +23,7 @@ import {
 import { PostListItem } from 'components/common';
 import { AppActions, RootState, useAppDispatch, useAppSelector } from 'store';
 import { REACT_APP_BACKEND_STATIC_ENDPOINT } from 'consts/endpoint';
+import { Next, Prev } from 'assets/svg';
 
 export const MyPostView: React.FC = () => {
   const posts = useAppSelector((state: RootState) => state.posts);
@@ -46,7 +47,7 @@ export const MyPostView: React.FC = () => {
       attachments: posts.posts[index].attachments || '',
       title: posts.posts[index].title,
       body: posts.posts[index].body,
-      id: posts.posts[index].id,
+      id: posts.posts[index].id == null ? -1 : Number(posts.posts[index].id),
     });
   };
 
@@ -106,12 +107,13 @@ export const MyPostView: React.FC = () => {
   const handleDelete = (e: BaseSyntheticEvent) => {
     const index = Number(e.target.id);
     const id = posts.posts[index].id;
-    dispatch(
-      AppActions.posts.deletePostRequest({
-        id,
-        callback: callback,
-      })
-    );
+    id != null &&
+      dispatch(
+        AppActions.posts.deletePostRequest({
+          id,
+          callback: callback,
+        })
+      );
   };
   const handlePrevPage = () => {
     const prev = posts.page == 1 ? 1 : posts.page - 1;
@@ -147,27 +149,7 @@ export const MyPostView: React.FC = () => {
         ))}
         <Pagination>
           <PageButton onClick={handlePrevPage}>
-            <svg
-              width="46px"
-              height="46px"
-              viewBox="0 0 1024 1024"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#94D7D3"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                {' '}
-                <g fill="#94D7D3" fillRule="nonzero">
-                  {' '}
-                  <path d="M358.989 657.36h51.154V366.64H358.99zM631.348 656.96l36.118-36.29L559.112 511.8l108.354-108.87-36.118-36.29L486.875 511.8z"></path>{' '}
-                </g>{' '}
-              </g>
-            </svg>
+            <Prev />
           </PageButton>
           {posts.page > 1 ? (
             <PageButton
@@ -204,28 +186,23 @@ export const MyPostView: React.FC = () => {
           )}
           {posts.total > 1 ? '...' : ''}
           {posts.page < posts.total ? (
-            <PageButton>{posts.total}</PageButton>
+            <PageButton
+              onClick={() =>
+                dispatch(
+                  AppActions.posts.getMyPostRequest({
+                    page: posts.total,
+                    list: posts.list,
+                  })
+                )
+              }
+            >
+              {posts.total}
+            </PageButton>
           ) : (
             ''
           )}
           <PageButton onClick={handleNextPage}>
-            <svg
-              width="46px"
-              height="46px"
-              fill="#94D7D3"
-              viewBox="0 0 1024 1024"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path d="M562.19 511.799l-144.6 145.718-36.15-36.43L489.89 511.8l-108.45-109.29 36.15-36.429zM691.2 657.92H640V366.08h51.2z"></path>
-              </g>
-            </svg>
+            <Next />
           </PageButton>
         </Pagination>
       </PostContainer>

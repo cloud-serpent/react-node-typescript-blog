@@ -14,8 +14,8 @@ import { Post } from 'types';
 import { Pass, Pending, Block, Calendar, Edit, Delete } from 'assets/svg';
 
 interface PostItemProps extends Post {
-  onEdit: MouseEventHandler;
-  onDelete: MouseEventHandler;
+  onEdit?: MouseEventHandler;
+  onDelete?: MouseEventHandler;
 }
 
 export const PostListItem: React.FC<PostItemProps> = ({
