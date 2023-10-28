@@ -1,26 +1,26 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import todosSlice, { todosActions } from './todos.slice';
 import { signupReducers, signupActions } from './signup.slice';
 
-import authSlice, { authActions } from './auth.slice';
-import loadingSlice, { loadingActions } from './loading.slice';
-import postsSlice, { postsActions } from './posts.slice';
-import errorsSlice, { errorsActions } from './error.slice';
+import { authReducers, authActions } from './auth.slice';
+import { loadingReducer, loadingActions } from './loading.slice';
+import { postsRducers, postsActions } from './posts.slice';
+import { errorReducers, errorsActions } from './error.slice';
+import { uploadRedcuers, uploadActions } from './upload.slice';
 
 export const Slices = combineReducers({
-  todos: todosSlice.reducer,
-  auth: authSlice.reducer,
+  auth: authReducers,
   signup: signupReducers,
-  loading: loadingSlice.reducer,
-  posts: postsSlice.reducer,
-  errors: errorsSlice.reducer,
+  loading: loadingReducer,
+  posts: postsRducers,
+  errors: errorReducers,
+  upload: uploadRedcuers,
 });
 
 export const Actions = {
-  todos: todosActions,
   signup: signupActions,
   auth: authActions,
   loading: loadingActions,
   posts: postsActions,
   errors: errorsActions,
+  upload: uploadActions,
 };

@@ -63,7 +63,7 @@ export const PostInput = styled.input`
   font-weight: 500;
   width: 100%;
   &:focus {
-    outline: none;
+    outline: block;
     box-shadow: 0px 0px 5px #94d7d3;
   }
 `;

@@ -1,5 +1,5 @@
 export interface Post {
-  attachment?: string;
+  attachments?: string;
   title: string;
   body: string;
   status: string;

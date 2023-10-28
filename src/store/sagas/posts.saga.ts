@@ -7,7 +7,9 @@ export function* getMyPost(action: any) {
   try {
     const result: ResponseGenerator = yield call(
       async () =>
-        await api().get(`/posts/${action.payload.page}/${action.payload.list}`)
+        await api().get(
+          `/posts/post/user?page=${action.payload.page}&listNum=${action.payload.list}`
+        )
     );
     console.log(result.data);
     if (result.data) {
@@ -24,7 +26,7 @@ export function* getMyPost(action: any) {
 export function* createNewPost(action: any) {
   try {
     const result: ResponseGenerator = yield call(
-      async () => await api().post('/posts', action.payload)
+      async () => await api().post('/posts/post', action.payload)
     );
     console.log(result);
     if (result.data) {
@@ -41,7 +43,7 @@ export function* createNewPost(action: any) {
 export function* updatePost(action: any) {
   try {
     const result: ResponseGenerator = yield call(
-      async () => await api().put('/posts', action.payload)
+      async () => await api().put('/posts/post', action.payload)
     );
     if (result.data) {
       action.payload.callback();
@@ -55,7 +57,7 @@ export function* updatePost(action: any) {
 export function* deletePost(action: any) {
   try {
     const result: ResponseGenerator = yield call(
-      async () => await api().delete(`/posts/${action.payload.id}`)
+      async () => await api().delete(`/posts/post/${action.payload.id}`)
     );
     if (result.data) {
       action.payload.callback();

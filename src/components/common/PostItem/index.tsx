@@ -19,7 +19,7 @@ interface PostItemProps extends Post {
 }
 
 export const PostListItem: React.FC<PostItemProps> = ({
-  attachment,
+  attachments,
   title,
   body,
   status,
@@ -31,7 +31,7 @@ export const PostListItem: React.FC<PostItemProps> = ({
   return (
     <PostItem>
       <PostImg>
-        <PostImgContent src={attachment} />
+        <PostImgContent src={attachments} />
       </PostImg>
       <PostItemContainer>
         <PostItemTitle>{title}</PostItemTitle>

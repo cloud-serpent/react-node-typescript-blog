@@ -22,15 +22,18 @@ import {
 } from './style';
 import { PostListItem } from 'components/common';
 import { AppActions, RootState, useAppDispatch, useAppSelector } from 'store';
+import { REACT_APP_BACKEND_STATIC_ENDPOINT } from 'consts/endpoint';
 
 export const MyPostView: React.FC = () => {
   const posts = useAppSelector((state: RootState) => state.posts);
   const [state, setState] = useState({
-    attachments: '',
     body: '',
     title: '',
     id: 0,
+    attachments: '',
   });
+  const [image, setImage] = useState<File | null>(null);
+  const [show, setShow] = useState('');
   const handleStateChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -40,7 +43,7 @@ export const MyPostView: React.FC = () => {
     const index = Number(e.target.id);
     console.log(e.target);
     setState({
-      attachments: posts.posts[index].attachment || '',
+      attachments: posts.posts[index].attachments || '',
       title: posts.posts[index].title,
       body: posts.posts[index].body,
       id: posts.posts[index].id,
@@ -51,14 +54,22 @@ export const MyPostView: React.FC = () => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
+      const date = new Date(Date.now());
+      const saveAs = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${
+        file.name
+      }`;
       reader.onloadend = () => {
-        setState({ ...state, attachments: reader.result as string });
+        setState({ ...state, attachments: saveAs });
+        setShow(reader.result as string);
+        setImage(file);
       };
       reader.readAsDataURL(file);
     }
   };
 
   const selectClear = () => {
+    setImage(null);
+    setShow('');
     setState({ ...state, attachments: '' });
   };
 
@@ -84,6 +95,7 @@ export const MyPostView: React.FC = () => {
   };
 
   const handlePost = () => {
+    dispatch(AppActions.upload.uploadRequest({ avatar: image }));
     dispatch(
       AppActions.posts.updatePostRequest({
         ...state,
@@ -118,7 +130,11 @@ export const MyPostView: React.FC = () => {
       <PostContainer>
         {posts.posts.map((item, index) => (
           <PostListItem
-            attachment={item.attachment}
+            attachments={
+              item.attachments
+                ? REACT_APP_BACKEND_STATIC_ENDPOINT + item.attachments
+                : ''
+            }
             title={item.title.slice(0, 40) + '...'}
             body={item.body.slice(0, 100) + '...'}
             status={item.status}
@@ -217,9 +233,13 @@ export const MyPostView: React.FC = () => {
         <PostHeader>
           <EditContainer>
             <ImageUploadWrapper>
-              {state.attachments && (
+              {(show || state.attachments) && (
                 <ImagePreview
-                  src={state.attachments}
+                  src={
+                    show
+                      ? show
+                      : REACT_APP_BACKEND_STATIC_ENDPOINT + state.attachments
+                  }
                   alt="Preview"
                   onClick={selectClear}
                 />

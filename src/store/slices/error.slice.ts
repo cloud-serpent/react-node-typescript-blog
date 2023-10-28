@@ -25,4 +25,4 @@ const errorsSlice = createSlice({
 
 export const errorsActions = errorsSlice.actions;
 
-export default errorsSlice;
+export const errorReducers = errorsSlice.reducer;

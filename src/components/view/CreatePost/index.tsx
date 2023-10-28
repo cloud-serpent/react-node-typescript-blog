@@ -21,10 +21,12 @@ export const CreatePostView: React.FC = () => {
   });
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('asfd');
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
+        console.log(reader.result as string);
         setState({ ...state, attachments: reader.result as string });
       };
       reader.readAsDataURL(file);
