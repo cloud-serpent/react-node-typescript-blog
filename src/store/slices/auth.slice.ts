@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppActionTypes } from 'store/store';
 import { UserModel } from 'models';
 
 interface AuthState {
@@ -17,19 +16,20 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
-    signInRequest(
-      state: AuthState,
-      action: PayloadAction<AppActionTypes.Auth.GetSignInRequestAction>
-    ) {},
+    signInRequest(state: AuthState, action: Object) {},
 
     setToken(state: AuthState, action: PayloadAction<any>) {
       state.token = action.payload.token;
       state.user = action.payload.user;
-      localStorage.setItem('token', action.payload);
+      localStorage.setItem('token', action.payload.token);
+    },
+    getUser(state: AuthState) {},
+    getUserSuccess(state: AuthState, action: PayloadAction<UserModel>) {
+      state.user = action.payload;
     },
   },
 });
 
 export const authActions = authSlice.actions;
 
-export default authSlice;
+export const authReducers = authSlice.reducer;
